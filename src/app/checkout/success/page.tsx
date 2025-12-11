@@ -3,8 +3,6 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useCart } from '@/contexts/CartContext';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { FiCheckCircle } from 'react-icons/fi';
 import Link from 'next/link';
 
@@ -27,7 +25,7 @@ function CheckoutSuccessContent() {
   }, [searchParams, clearCart, router]);
 
   return (
-    <main className="flex-1 flex items-center justify-center">
+    <div className="flex items-center justify-center min-h-[60vh]">
       <div className="max-w-md w-full mx-auto px-4 py-12 text-center">
         <div className="mb-6 flex justify-center">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
@@ -61,35 +59,31 @@ function CheckoutSuccessContent() {
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 
 export default function CheckoutSuccessPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white">
-      <Header />
-      <Suspense fallback={
-        <main className="flex-1 flex items-center justify-center">
-          <div className="max-w-md w-full mx-auto px-4 py-12 text-center">
-            <div className="mb-6 flex justify-center">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
-                <FiCheckCircle className="w-12 h-12 text-green-600" />
-              </div>
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="max-w-md w-full mx-auto px-4 py-12 text-center">
+          <div className="mb-6 flex justify-center">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+              <FiCheckCircle className="w-12 h-12 text-green-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Payment Successful!
-            </h1>
-            <p className="text-gray-600 mb-8">
-              Loading order details...
-            </p>
           </div>
-        </main>
-      }>
-        <CheckoutSuccessContent />
-      </Suspense>
-      <Footer />
-    </div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            Payment Successful!
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Loading order details...
+          </p>
+        </div>
+      </div>
+    }>
+      <CheckoutSuccessContent />
+    </Suspense>
   );
 }
 

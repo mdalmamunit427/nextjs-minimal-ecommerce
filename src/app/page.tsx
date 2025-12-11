@@ -1,8 +1,6 @@
 import { Suspense } from 'react';
 import { products } from '@/data/products';
 import ProductGrid from '@/components/ProductGrid';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 interface HomeProps {
   searchParams: Promise<{ category?: string }>;
@@ -34,16 +32,10 @@ export default async function Home({ searchParams }: HomeProps) {
   const category = params.category || 'all';
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
-      <Header />
-      <main className="flex-1">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <Suspense fallback={<ProductGridFallback />}>
-            <ProductGrid products={products} initialCategory={category} />
-          </Suspense>
-        </div>
-      </main>
-      <Footer />
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <Suspense fallback={<ProductGridFallback />}>
+        <ProductGrid products={products} initialCategory={category} />
+      </Suspense>
     </div>
   );
 }
